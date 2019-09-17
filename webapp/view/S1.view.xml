@@ -4,8 +4,7 @@
 		<content>
 			<List items="{path:'/Products'}" growing="true" growingThreshold="20" itemPress="onItemPress">
 				<items>
-<ObjectListItem type="Navigation" intro="{Id}" title="{path:'Name', formatter: '.meuFormatador.toUpperCase' }" number="{Price}" numberUnit="U$">
-
+					<ObjectListItem type="Navigation" intro="{Id}" title="{path:'Name', formatter: '.meuFormatador.toUpperCase' }" number="{Price}" numberUnit="U$">
 						<attributes>
 							<core:ExtensionPoint name="extListItemAttibutes">
 								<ObjectAttribute title="{i18n>category}" text="{MainCategoryName}"/>
@@ -13,10 +12,24 @@
 							</core:ExtensionPoint>
 						</attributes>
 						<firstStatus>
-							<ObjectStatus text="{DimensionHeight} x {DimensionWidth} x {DimensionDepth}"/>
+							<ObjectStatus text="{DimensionHeight} x {DimensionWidth} x {DimensionDepth}" />
 						</firstStatus>
 						<secondStatus>
-							<ObjectStatus text="Volume"/>
+							<ObjectStatus text="{ 
+								parts: 
+								[  
+									{
+										path:'DimensionHeight'
+									},
+									{
+										path:'DimensionWidth' 
+									},
+									{
+										path:'DimensionDepth' 
+									}
+								],
+								formatter: '.meuFormatador.calculateVolume'
+								}" />
 						</secondStatus>
 					</ObjectListItem>
 				</items>
